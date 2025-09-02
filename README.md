@@ -12,6 +12,6 @@
 
 ## kaizennann
 
-## tuika3.com
+## tuika3
 
 This is Develop branch
