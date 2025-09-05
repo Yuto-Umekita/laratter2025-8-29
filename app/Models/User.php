@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+// Œ^éŒ¾‚µ‚½‚¢ê‡i”CˆÓj
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -44,5 +45,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * User has many Tweets.
+     */
+    public function tweets(): HasMany // © Œ^éŒ¾‚Í”CˆÓ
+    {
+        return $this->hasMany(Tweet::class); // App\Models\Tweet ‚ð‘z’è
     }
 }
