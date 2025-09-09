@@ -3,62 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Tweet; // ← 追加
 
 class TweetLikeController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
+     * 「いいね」する
      */
-    public function store(Request $request)
+    public function store(Tweet $tweet)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+        // 既にいいねしていない場合のみ追加（重複防止）
+        if (! $tweet->liked()->where('user_id', auth()->id())->exists()) {
+            $tweet->liked()->attach(auth()->id());
+        }
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
+     * 「いいね」を外す
      */
-    public function destroy(string $id)
+    public function destroy(Tweet $tweet)
     {
-        //
+        $tweet->liked()->detach(auth()->id());
+        return back();
     }
 }
