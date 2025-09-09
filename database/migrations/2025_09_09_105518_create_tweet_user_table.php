@@ -12,13 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tweet_user', function (Blueprint $table) {
-      $table->id();
-      // ? 3s’Ç‰Á
-      $table->foreignId('tweet_id')->constrained()->cascadeOnDelete();
-      $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-      $table->unique(['tweet_id', 'user_id']);
-      $table->timestamps();
-    });
+            $table->id();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-       Schema::dropIfExists('tweet_user');
+        Schema::dropIfExists('tweet_user');
     }
 };
