@@ -1,7 +1,6 @@
 <?php
 namespace Database\Factories;
 
-// ? 2s’Ç‰Á
 use App\Models\Tweet;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -11,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class TweetFactory extends Factory
 {
-  // ? ’Ç‰Á
   protected $model = Tweet::class;
 
   /**
@@ -21,10 +19,10 @@ class TweetFactory extends Factory
    */
   public function definition(): array
   {
-    // ? ’Ç‰Á
+    //  è¿½åŠ 
     return [
-      'user_id' => User::factory(), // Userƒ‚ƒfƒ‹‚ÌFactory‚ðŽg—p‚µ‚Äƒ†[ƒU‚ð¶¬
-      'tweet' => $this->faker->text(200) // ƒ_ƒ~[‚ÌƒeƒLƒXƒgƒf[ƒ^
+      'user_id' => User::factory(), // Userãƒ¢ãƒ‡ãƒ«ã®Factoryã‚’ä½¿ç”¨ã—ã¦ãƒ¦ãƒ¼ã‚¶ã‚’ç”Ÿæˆ
+      'tweet' => $this->faker->text(200) // ãƒ€ãƒŸãƒ¼ã®ãƒ†ã‚­ã‚¹ãƒˆãƒ‡ãƒ¼ã‚¿
     ];
   }
 }

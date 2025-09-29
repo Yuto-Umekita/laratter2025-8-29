@@ -13,8 +13,12 @@ class Tweet extends Model
 
     protected $fillable = ['tweet'];
 
+      public function comments()
+    {
+        return $this->hasMany(Comment::class)->orderBy('created_at', 'desc');
+    }
     /**
-     * “ŠeÒ
+     * ï¿½ï¿½ï¿½eï¿½ï¿½
      */
     public function user()
     {
@@ -22,7 +26,7 @@ class Tweet extends Model
     }
 
     /**
-     * ‚±‚ÌTweet‚Éu‚¢‚¢‚Ëv‚µ‚½ƒ†[ƒU[
+     * ï¿½ï¿½ï¿½ï¿½Tweetï¿½Éuï¿½ï¿½ï¿½ï¿½ï¿½Ëvï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½Uï¿½[
      */
     public function liked()
     {

@@ -1,78 +1,79 @@
 <?php
-// ? ’Ç‰Á
+//  è¿½åŠ 
 use App\Models\Tweet;
 use App\Models\User;
 
-// ?ˆê——Žæ“¾‚ÌƒeƒXƒg
+// ä¸€è¦§å–å¾—ã®ãƒ†ã‚¹ãƒˆ
 it('displays tweets', function () {
-  // ƒ†[ƒU‚ðì¬
+  // ãƒ¦ãƒ¼ã‚¶ã‚’ä½œæˆ
   $user = User::factory()->create();
 
-  // ƒ†[ƒU‚ð”FØ
+  // ãƒ¦ãƒ¼ã‚¶ã‚’èªè¨¼
   $this->actingAs($user);
 
-  // Tweet‚ðì¬
+  // Tweetã‚’ä½œæˆ
   $tweet = Tweet::factory()->create();
 
-  // GETƒŠƒNƒGƒXƒg
+  // GETãƒªã‚¯ã‚¨ã‚¹ãƒˆ
   $response = $this->get('/tweets');
 
-  // ƒŒƒXƒ|ƒ“ƒX‚ÉTweet‚Ì“à—e‚Æ“ŠeŽÒ–¼‚ªŠÜ‚Ü‚ê‚Ä‚¢‚é‚±‚Æ‚ðŠm”F
+  // ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã«Tweetã®å†…å®¹ã¨æŠ•ç¨¿è€…åãŒå«ã¾ã‚Œã¦ã„ã‚‹ã“ã¨ã‚’ç¢ºèª
   $response->assertStatus(200);
   $response->assertSee($tweet->tweet);
   $response->assertSee($tweet->user->name);
 });
-
-// ì¬‰æ–Ê‚ÌƒeƒXƒg
+// ä½œæˆç”»é¢ã®ãƒ†ã‚¹ãƒˆ
 it('displays the create tweet page', function () {
-  // ƒeƒXƒg—p‚Ìƒ†[ƒU[‚ðì¬
+  // ãƒ†ã‚¹ãƒˆç”¨ã®ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‚’ä½œæˆ
   $user = User::factory()->create();
 
-  // ƒ†[ƒU[‚ð”FØiƒƒOƒCƒ“j
+  // ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‚’èªè¨¼ï¼ˆãƒ­ã‚°ã‚¤ãƒ³ï¼‰
   $this->actingAs($user);
 
-  // ì¬‰æ–Ê‚ÉƒAƒNƒZƒX
+  // ä½œæˆç”»é¢ã«ã‚¢ã‚¯ã‚»ã‚¹
   $response = $this->get('/tweets/create');
 
-  // ƒXƒe[ƒ^ƒXƒR[ƒh‚ª200‚Å‚ ‚é‚±‚Æ‚ðŠm”F
+  // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ãŒ200ã§ã‚ã‚‹ã“ã¨ã‚’ç¢ºèª
   $response->assertStatus(200);
 });
-// ì¬ˆ—‚ÌƒeƒXƒg
+
+// ä½œæˆå‡¦ç†ã®ãƒ†ã‚¹ãƒˆ
 it('allows authenticated users to create a tweet', function () {
-  // ƒ†[ƒU‚ðì¬
+  // ãƒ¦ãƒ¼ã‚¶ã‚’ä½œæˆ
   $user = User::factory()->create();
 
-  // ƒ†[ƒU‚ð”FØ
+  // ãƒ¦ãƒ¼ã‚¶ã‚’èªè¨¼
   $this->actingAs($user);
 
-  // Tweet‚ðì¬
+  // Tweetã‚’ä½œæˆ
   $tweetData = ['tweet' => 'This is a test tweet.'];
 
-  // POSTƒŠƒNƒGƒXƒg
+  // POSTãƒªã‚¯ã‚¨ã‚¹ãƒˆ
   $response = $this->post('/tweets', $tweetData);
 
-  // ƒf[ƒ^ƒx[ƒX‚É•Û‘¶‚³‚ê‚½‚±‚Æ‚ðŠm”F
+  // ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã«ä¿å­˜ã•ã‚ŒãŸã“ã¨ã‚’ç¢ºèª
   $this->assertDatabaseHas('tweets', $tweetData);
 
-  // ƒŒƒXƒ|ƒ“ƒX‚ÌŠm”F
+  // ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã®ç¢ºèª
   $response->assertStatus(302);
   $response->assertRedirect('/tweets');
 });
-// Ú×‰æ–Ê‚ÌƒeƒXƒg
+
+// è©³ç´°ç”»é¢ã®ãƒ†ã‚¹ãƒˆ
 it('displays a tweet', function () {
-  // ƒ†[ƒU‚ðì¬
+  // ãƒ¦ãƒ¼ã‚¶ã‚’ä½œæˆ
   $user = User::factory()->create();
 
-  // ƒ†[ƒU‚ð”FØ
+  // ãƒ¦ãƒ¼ã‚¶ã‚’èªè¨¼
   $this->actingAs($user);
 
-  // Tweet‚ðì¬
+  // Tweetã‚’ä½œæˆ
   $tweet = Tweet::factory()->create();
 
-  // GETƒŠƒNƒGƒXƒg
+  // GETãƒªã‚¯ã‚¨ã‚¹ãƒˆ
   $response = $this->get("/tweets/{$tweet->id}");
 
-  // ƒŒƒXƒ|ƒ“ƒX‚ÉTweet‚Ì“à—e‚ªŠÜ‚Ü‚ê‚Ä‚¢‚é‚±‚Æ‚ðŠm”F
+  // ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã«Tweetã®å†…å®¹ãŒå«ã¾ã‚Œã¦ã„ã‚‹ã“ã¨ã‚’ç¢ºèª
   $response->assertStatus(200);
   $response->assertSee($tweet->tweet);
   $response->assertSee($tweet->created_at->format('Y-m-d H:i'));
@@ -80,68 +81,112 @@ it('displays a tweet', function () {
   $response->assertSee($tweet->tweet);
   $response->assertSee($tweet->user->name);
 });
-// •ÒW‰æ–Ê‚ÌƒeƒXƒg
+
+// ç·¨é›†ç”»é¢ã®ãƒ†ã‚¹ãƒˆ
 it('displays the edit tweet page', function () {
-  // ƒeƒXƒg—p‚Ìƒ†[ƒU[‚ðì¬
+  // ãƒ†ã‚¹ãƒˆç”¨ã®ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‚’ä½œæˆ
   $user = User::factory()->create();
 
-  // ƒ†[ƒU[‚ð”FØiƒƒOƒCƒ“j
+  // ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‚’èªè¨¼ï¼ˆãƒ­ã‚°ã‚¤ãƒ³ï¼‰
   $this->actingAs($user);
 
-  // Tweet‚ðì¬
+  // Tweetã‚’ä½œæˆ
   $tweet = Tweet::factory()->create(['user_id' => $user->id]);
 
-  // •ÒW‰æ–Ê‚ÉƒAƒNƒZƒX
+  // ç·¨é›†ç”»é¢ã«ã‚¢ã‚¯ã‚»ã‚¹
   $response = $this->get("/tweets/{$tweet->id}/edit");
 
-  // ƒXƒe[ƒ^ƒXƒR[ƒh‚ª200‚Å‚ ‚é‚±‚Æ‚ðŠm”F
+  // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ãŒ200ã§ã‚ã‚‹ã“ã¨ã‚’ç¢ºèª
   $response->assertStatus(200);
 
-  // ƒrƒ…[‚ÉTweet‚Ì“à—e‚ªŠÜ‚Ü‚ê‚Ä‚¢‚é‚±‚Æ‚ðŠm”F
+  // ãƒ“ãƒ¥ãƒ¼ã«Tweetã®å†…å®¹ãŒå«ã¾ã‚Œã¦ã„ã‚‹ã“ã¨ã‚’ç¢ºèª
   $response->assertSee($tweet->tweet);
 });
-// XVˆ—‚ÌƒeƒXƒg
+
+// æ›´æ–°å‡¦ç†ã®ãƒ†ã‚¹ãƒˆ
 it('allows a user to update their tweet', function () {
-  // ƒ†[ƒU‚ðì¬
+  // ãƒ¦ãƒ¼ã‚¶ã‚’ä½œæˆ
   $user = User::factory()->create();
 
-  // ƒ†[ƒU‚ð”FØ
+  // ãƒ¦ãƒ¼ã‚¶ã‚’èªè¨¼
   $this->actingAs($user);
 
-  // Tweet‚ðì¬
+  // Tweetã‚’ä½œæˆ
   $tweet = Tweet::factory()->create(['user_id' => $user->id]);
 
-  // XVƒf[ƒ^
+  // æ›´æ–°ãƒ‡ãƒ¼ã‚¿
   $updatedData = ['tweet' => 'Updated tweet content.'];
 
-  // PUTƒŠƒNƒGƒXƒg
+  // PUTãƒªã‚¯ã‚¨ã‚¹ãƒˆ
   $response = $this->put("/tweets/{$tweet->id}", $updatedData);
 
-  // ƒf[ƒ^ƒx[ƒX‚ªXV‚³‚ê‚½‚±‚Æ‚ðŠm”F
+  // ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ãŒæ›´æ–°ã•ã‚ŒãŸã“ã¨ã‚’ç¢ºèª
   $this->assertDatabaseHas('tweets', $updatedData);
 
-  // ƒŒƒXƒ|ƒ“ƒX‚ÌŠm”F
+  // ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã®ç¢ºèª
   $response->assertStatus(302);
   $response->assertRedirect("/tweets/{$tweet->id}");
 });
-// íœˆ—‚ÌƒeƒXƒg
+
+// å‰Šé™¤å‡¦ç†ã®ãƒ†ã‚¹ãƒˆ
 it('allows a user to delete their tweet', function () {
-  // ƒ†[ƒU‚ðì¬
+  // ãƒ¦ãƒ¼ã‚¶ã‚’ä½œæˆ
   $user = User::factory()->create();
 
-  // ƒ†[ƒU‚ð”FØ
+  // ãƒ¦ãƒ¼ã‚¶ã‚’èªè¨¼
   $this->actingAs($user);
 
-  // Tweet‚ðì¬
+  // Tweetã‚’ä½œæˆ
   $tweet = Tweet::factory()->create(['user_id' => $user->id]);
 
-  // DELETEƒŠƒNƒGƒXƒg
+  // DELETEãƒªã‚¯ã‚¨ã‚¹ãƒˆ
   $response = $this->delete("/tweets/{$tweet->id}");
 
-  // ƒf[ƒ^ƒx[ƒX‚©‚çíœ‚³‚ê‚½‚±‚Æ‚ðŠm”F
+  // ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã‹ã‚‰å‰Šé™¤ã•ã‚ŒãŸã“ã¨ã‚’ç¢ºèª
   $this->assertDatabaseMissing('tweets', ['id' => $tweet->id]);
 
-  // ƒŒƒXƒ|ƒ“ƒX‚ÌŠm”F
+  // ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã®ç¢ºèª
   $response->assertStatus(302);
   $response->assertRedirect('/tweets');
+});
+
+it('can search tweets by content keyword', function () {
+  $user = User::factory()->create();
+  $this->actingAs($user);
+
+  // ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã‚’å«ã‚€ãƒ„ã‚¤ãƒ¼ãƒˆã‚’ä½œæˆ
+  Tweet::factory()->create([
+    'tweet' => 'This is a test tweet',
+    'user_id' => $user->id,
+  ]);
+
+  // ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã‚’å«ã¾ãªã„ãƒ„ã‚¤ãƒ¼ãƒˆã‚’ä½œæˆ
+  Tweet::factory()->create([
+    'tweet' => 'This is another tweet',
+    'user_id' => $user->id,
+  ]);
+
+  // ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ "test" ã§æ¤œç´¢
+  $response = $this->get(route('tweets.search', ['keyword' => 'test']));
+
+  $response->assertStatus(200);
+  $response->assertSee('This is a test tweet');
+  $response->assertDontSee('This is another tweet');
+});
+
+it('shows no tweets if no match found', function () {
+  $user = User::factory()->create();
+  $this->actingAs($user);
+
+  Tweet::factory()->create([
+    'tweet' => 'This is a tweet',
+    'user_id' => $user->id,
+  ]);
+
+  // å­˜åœ¨ã—ãªã„ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã§æ¤œç´¢
+  $response = $this->get(route('tweets.search', ['keyword' => 'nonexistent']));
+
+  $response->assertStatus(200);
+  $response->assertDontSee('This is a tweet');
+  $response->assertSee('No tweets found.');
 });
