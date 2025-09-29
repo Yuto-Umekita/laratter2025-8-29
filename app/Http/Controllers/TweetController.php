@@ -7,25 +7,20 @@ use Illuminate\Http\Request;
 
 class TweetController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+  public function index()
+  {
+    // ? í«â¡
     $tweets = Tweet::with(['user', 'liked'])->latest()->get();
-    // dd($tweets);
     return view('tweets.index', compact('tweets'));
-    }
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+  public function create()
+  {
+    // ? í«â¡
     return view('tweets.create');
-    }
+  }
+
+  // è»ó™
 
     /**
      * Store a newly created resource in storage.
@@ -48,7 +43,7 @@ class TweetController extends Controller
     public function show(Tweet $tweet)
     {
         //
-    return view('tweets.show', compact('tweet'));
+       return view('tweets.show', compact('tweet'));
     }
 
     /**

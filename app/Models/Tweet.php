@@ -24,7 +24,7 @@ class Tweet extends Model
     /**
      * このTweetに「いいね」したユーザー
      */
-    public function liked(): BelongsToMany
+    public function liked()
     {
         return $this->belongsToMany(User::class)->withTimestamps();
     }

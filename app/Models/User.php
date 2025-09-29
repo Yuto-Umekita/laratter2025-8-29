@@ -5,9 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-// 型宣言したい場合（任意）
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -48,19 +45,15 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-     * User has many Tweets.
-     */
-    public function tweets(): HasMany // ← 型宣言は任意
+    public function tweets()
     {
-        return $this->hasMany(Tweet::class); // App\Models\Tweet を想定
+        return $this->hasMany(Tweet::class);
     }
 
-    /**
-     * ユーザーが「いいね」したツイート
-     */
-    public function likes(): BelongsToMany
+      public function likes()
     {
         return $this->belongsToMany(Tweet::class)->withTimestamps();
     }
+
 }
+
