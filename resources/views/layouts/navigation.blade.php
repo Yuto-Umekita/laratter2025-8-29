@@ -15,7 +15,6 @@
           <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
             {{ __('Dashboard') }}
           </x-nav-link>
-          <!-- ? 2€–Ú’Ç‰Á -->
           <x-nav-link :href="route('tweets.index')" :active="request()->routeIs('tweets.index')">
             {{ __('Tweetˆê——') }}
           </x-nav-link>
@@ -76,7 +75,6 @@
       <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
         {{ __('Dashboard') }}
       </x-responsive-nav-link>
-      <!-- ? 2€–Ú’Ç‰Á -->
       <x-responsive-nav-link :href="route('tweets.index')" :active="request()->routeIs('tweets.index')">
         {{ __('Tweetˆê——') }}
       </x-responsive-nav-link>

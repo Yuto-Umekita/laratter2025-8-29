@@ -26,7 +26,6 @@
             </form>
           </div>
           @endif
-          {{-- ? ’Ç‰Á --}}
           <div class="flex mt-4">
             @if ($tweet->liked->contains(auth()->id()))
             <form action="{{ route('tweets.dislike', $tweet) }}" method="POST">
@@ -41,7 +40,6 @@
             </form>
             @endif
           </div>
-          {{-- ? ‚±‚±‚Ü‚Å --}}
         </div>
       </div>
     </div>

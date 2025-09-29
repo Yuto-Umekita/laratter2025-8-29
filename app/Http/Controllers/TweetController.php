@@ -9,14 +9,12 @@ class TweetController extends Controller
 {
   public function index()
   {
-    // ? ’Ç‰Á
     $tweets = Tweet::with(['user', 'liked'])->latest()->get();
     return view('tweets.index', compact('tweets'));
   }
 
   public function create()
   {
-    // ? ’Ç‰Á
     return view('tweets.create');
   }
 
