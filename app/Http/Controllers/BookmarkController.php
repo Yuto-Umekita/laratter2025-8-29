@@ -7,12 +7,8 @@ use Illuminate\Http\Request;
 
 class BookmarkController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // ← __construct と $this->middleware('auth') は削除
 
-    // 一覧（マイページの隣に出す「ブックマーク」）
     public function index(Request $request)
     {
         $tweets = $request->user()->bookmarks()
@@ -23,7 +19,6 @@ class BookmarkController extends Controller
         return view('tweets.bookmarks', compact('tweets'));
     }
 
-    // 追加/解除トグル
     public function toggle(Request $request, Tweet $tweet)
     {
         $user = $request->user();

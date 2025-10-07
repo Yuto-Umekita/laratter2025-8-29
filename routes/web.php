@@ -32,6 +32,5 @@ Route::middleware('auth')->group(function () {
   Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmarks.index');
   Route::post('/bookmarks/{tweet}', [BookmarkController::class, 'toggle'])->name('bookmarks.toggle');
 
-});
-
+  });
 require __DIR__ . '/auth.php';
